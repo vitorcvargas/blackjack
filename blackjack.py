@@ -5,13 +5,15 @@ def game_on():
     print('Welcome to blackjack!')
     print('Get as close to 21 without going over!\nDealer hits until she 17 or more\nAce count as 1 or 11')
 
-    deck = Deck()
-    deck.shuffle()
+    
 
     player_chips = Chip()
 
     game_on = True
     while game_on:
+        
+        deck = Deck()
+        deck.shuffle()
 
         if player_chips.total == 0:
             player_chips.total = 100
