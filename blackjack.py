@@ -3,15 +3,14 @@ from modules import *
 def game_on():
 
     print('Welcome to blackjack!')
-    print('Get as close to 21 without going over!\nDealer hits until she 17 or more\nAce count as 1 or 11')
+    print('Get as close to 21 without going over!\nDealer hits until she gets 17 or more\nAce count as 1 or 11')
 
-    
 
     player_chips = Chip()
 
     game_on = True
     while game_on:
-        
+
         deck = Deck()
         deck.shuffle()
 
@@ -44,15 +43,17 @@ def game_on():
         player_win = False
 
         draw = False
-
+        
+        for card in player_hand:
+            player_total += get_card_value(player_total, card.rank)
+        
+        for card in dealer_hand:
+            dealer_total += get_card_value(dealer_total, card.rank)
+        
         print("Dealer's hand:\n{} of {}\n<hidden>".format(dealer_hand[0].rank, dealer_hand[0].suit))
         print()
         print("Your hand:\n{} of {}".format(player_hand[0].rank, player_hand[0].suit))
         print("{} of {}\n".format(player_hand[1].rank, player_hand[1].suit))
-
-        for card in player_hand:
-            player_total += get_card_value(player_total, card.rank)
-        
         print("Your total score is {}\n".format(player_total))
 
         while True:
@@ -73,7 +74,7 @@ def game_on():
             else:
                 break
         
-        if not player_bust:
+        if not player_bust: 
             while dealer_total <= 17:
                 hit = deck.hit()
                 dealer_hand.append(hit)
@@ -112,5 +113,4 @@ def game_on():
              
                 
 game_on()
-                
 
